@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+  :root {
+    --primary: #40A1F4;
+    --primary-foreground: #FFFFFF;
+    --primary-dark: #163B78;
+    --weak: #424242;
+  }
+}
