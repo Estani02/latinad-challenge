@@ -3,18 +3,18 @@
 import {SearchIcon} from 'lucide-react';
 import {Controller, useForm} from 'react-hook-form';
 
-import {SearchArea} from '../auto-complete/SearchArea';
+import {SearchArea, SearchAreaOption} from '../auto-complete/SearchArea';
 import {StartEndCampaign} from '../data-picker/StartEndCampaign';
 
 interface LaunchCampaign {
-  search: string;
+  search: SearchAreaOption;
   startEnd: [Date | null, Date | null];
 }
 
 export function LaunchCampaign() {
   const {control, handleSubmit} = useForm<LaunchCampaign>({
     defaultValues: {
-      search: '',
+      search: {value: '', label: '', boundingbox: []},
       startEnd: [null, null],
     },
   });
@@ -25,7 +25,7 @@ export function LaunchCampaign() {
 
   return (
     <form
-      className="text-weak mt-10 flex items-center rounded-full bg-white px-4 py-2"
+      className="mt-10 flex items-center rounded-full bg-white px-4 py-2 text-weak"
       onSubmit={onSubmit}
     >
       <Controller
@@ -39,7 +39,7 @@ export function LaunchCampaign() {
         render={({field}) => <StartEndCampaign<LaunchCampaign> field={field} />}
       />
       <button
-        className="bg-primary hover:bg-primary-dark ml-4 rounded-full px-5 py-2 text-white transition-colors duration-200"
+        className="ml-4 rounded-full bg-primary px-5 py-2 text-white transition-colors duration-200 hover:bg-primary-dark"
         type="submit"
       >
         <SearchIcon size={20} />
