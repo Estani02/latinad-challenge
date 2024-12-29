@@ -11,18 +11,21 @@ interface SearchAreaProps<T extends FieldValues> {
 }
 
 interface Coords {
-  lat: string;
-  lon: string;
+  lat_sw: string;
+  lng_sw: string;
+  lat_ne: string;
+  lng_ne: string;
 }
 
-export interface SearchAreaOption {
+interface SearchAreaOption {
   value: string; // This will store the display_name
   label: string;
-  boundingbox: string[];
+  coords: Coords;
 }
 
 export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
   const [options, setOptions] = useState<SearchAreaOption[]>([]);
+  const [locationSelected, setLocationSelected] = useState<string>();
 
   const handleSearch = async (value: string) => {
     if (!value) {
@@ -45,7 +48,12 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
         (item: {lat: string; lon: string; display_name: string; boundingbox: string[]}) => ({
           value: item.display_name,
           label: item.display_name,
-          boundingbox: item.boundingbox,
+          coords: {
+            lat_sw: item.boundingbox[0],
+            lng_sw: item.boundingbox[2],
+            lat_ne: item.boundingbox[1],
+            lng_ne: item.boundingbox[3],
+          },
         }),
       );
 
@@ -58,7 +66,8 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
   const debouncedHandleSearch = useCallback(debounce(handleSearch, 300), []);
 
   const onSelect = (value: string, option: SearchAreaOption) => {
-    field.onChange(option);
+    setLocationSelected(value);
+    field.onChange(option.coords);
   };
 
   return (
@@ -71,8 +80,14 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
           className="h-fit"
           labelRender={(option) => option.label}
           options={options}
-          value={field.value?.value || ''}
-          onChange={(value) => field.onChange({value, label: value, boundingbox: []})}
+          value={locationSelected}
+          onChange={(value) =>
+            field.onChange({
+              value,
+              label: value,
+              coords: {lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''},
+            })
+          }
           onSearch={debouncedHandleSearch}
           onSelect={onSelect}
         >

@@ -3,18 +3,25 @@
 import {SearchIcon} from 'lucide-react';
 import {Controller, useForm} from 'react-hook-form';
 
-import {SearchArea, SearchAreaOption} from '../auto-complete/SearchArea';
+import {SearchArea} from '../auto-complete/SearchArea';
 import {StartEndCampaign} from '../data-picker/StartEndCampaign';
 
+interface Coords {
+  lat_sw: string;
+  lng_sw: string;
+  lat_ne: string;
+  lng_ne: string;
+}
+
 interface LaunchCampaign {
-  search: SearchAreaOption;
+  coordinates: Coords;
   startEnd: [Date | null, Date | null];
 }
 
 export function LaunchCampaign() {
   const {control, handleSubmit} = useForm<LaunchCampaign>({
     defaultValues: {
-      search: {value: '', label: '', boundingbox: []},
+      coordinates: {lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''},
       startEnd: [null, null],
     },
   });
@@ -30,7 +37,7 @@ export function LaunchCampaign() {
     >
       <Controller
         control={control}
-        name="search"
+        name="coordinates"
         render={({field}) => <SearchArea<LaunchCampaign> field={field} />}
       />
       <Controller
