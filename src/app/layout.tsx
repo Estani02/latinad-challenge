@@ -4,6 +4,7 @@ import './globals.css';
 import {ConfigProvider} from 'antd';
 import {Poppins} from 'next/font/google';
 import es_ES from 'antd/es/locale/es_ES';
+import Image from 'next/image';
 
 import {Header} from '@/components/layout/Header';
 
@@ -30,6 +31,13 @@ export default function RootLayout({
           <Header />
           {children}
         </ConfigProvider>
+        <Image
+          alt="bg"
+          className="absolute bottom-0 left-0 right-0"
+          height={400}
+          src="/bk-latinad.png"
+          width={1724}
+        />
       </body>
     </html>
   );
