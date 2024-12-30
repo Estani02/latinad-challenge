@@ -20,8 +20,9 @@ interface Coords {
 }
 
 interface SearchAreaOption {
-  value: string; // This will store the display_name
+  value: string;
   coords: Coords;
+  key: string;
 }
 
 export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
@@ -51,6 +52,7 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
           display_name: string;
           lat: string;
           lon: string;
+          place_id: number;
           boundingbox: string[];
         }) => ({
           value: item.display_name,
@@ -62,6 +64,7 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
             lat_ne: item.boundingbox[1],
             lng_ne: item.boundingbox[3],
           },
+          key: item.place_id,
         }),
       );
 
@@ -93,6 +96,7 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
         <AutoComplete
           allowClear
           className="h-fit w-full lg:w-[400px]"
+          notFoundContent="No hay resultados"
           options={options}
           value={locationSelected}
           onChange={(value) => {
