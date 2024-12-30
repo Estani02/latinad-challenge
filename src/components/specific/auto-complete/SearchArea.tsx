@@ -19,13 +19,12 @@ interface Coords {
 
 interface SearchAreaOption {
   value: string; // This will store the display_name
-  label: string;
   coords: Coords;
 }
 
 export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
   const [options, setOptions] = useState<SearchAreaOption[]>([]);
-  const [locationSelected, setLocationSelected] = useState<string>();
+  const [locationSelected, setLocationSelected] = useState<string>('');
 
   const handleSearch = async (value: string) => {
     if (!value) {
@@ -45,9 +44,8 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
       });
 
       const results = response.data.map(
-        (item: {lat: string; lon: string; display_name: string; boundingbox: string[]}) => ({
+        (item: {name: string; display_name: string; boundingbox: string[]}) => ({
           value: item.display_name,
-          label: item.display_name,
           coords: {
             lat_sw: item.boundingbox[0],
             lng_sw: item.boundingbox[2],
@@ -59,10 +57,12 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
 
       setOptions(results);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error fetching search results:', error);
     }
   };
 
+  // eslint-disable-next-line react-compiler/react-compiler, react-hooks/exhaustive-deps
   const debouncedHandleSearch = useCallback(debounce(handleSearch, 300), []);
 
   const onSelect = (value: string, option: SearchAreaOption) => {
@@ -70,28 +70,36 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
     field.onChange(option.coords);
   };
 
+  const onClear = () => {
+    setLocationSelected('');
+    field.onChange({lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''});
+  };
+
   return (
-    <div className="flex h-fit items-center">
+    <div className="flex h-fit w-full items-center rounded-full bg-white px-4 py-2 lg:w-auto lg:bg-none lg:p-0">
       <MapPin className="text-weak" size={20} />
-      <div className="flex flex-col px-3">
+      <div className="flex w-full flex-col px-3 lg:w-auto">
         <span className="pl-1 text-xs text-weak">Zona de campaña</span>
         <AutoComplete
           allowClear
-          className="h-fit"
-          labelRender={(option) => option.label}
+          className="h-fit w-full lg:w-[400px]"
           options={options}
           value={locationSelected}
-          onChange={(value) =>
-            field.onChange({
-              value,
-              label: value,
-              coords: {lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''},
-            })
-          }
+          onChange={(value) => {
+            if (!value) {
+              onClear();
+            } else {
+              setLocationSelected(value);
+            }
+          }}
           onSearch={debouncedHandleSearch}
           onSelect={onSelect}
         >
-          <Input className="border-none p-0 pl-1 outline-none" placeholder="¿A dónde la apuntas?" />
+          <Input
+            required
+            className="border-none p-0 pl-2 pr-6 outline-none"
+            placeholder="¿A dónde la apuntas?"
+          />
         </AutoComplete>
       </div>
     </div>

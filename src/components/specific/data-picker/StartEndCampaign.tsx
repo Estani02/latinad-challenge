@@ -21,13 +21,24 @@ export function StartEndCampaign<T extends FieldValues>({field}: StartEndCampaig
     <div className="flex h-fit items-center">
       <Calendar className="text-weak" size={20} />
       <div className="flex flex-col px-3">
-        <span className="text-weak text-xs">Rango de campaña</span>
+        <span className="text-xs text-weak">Rango de campaña</span>
         <RangePicker
-          className="border-none p-0 shadow-none outline-none"
+          required
+          className="border-none p-0 px-2 shadow-none outline-none"
           disabledDate={disabledDate}
           format="YYYY-MM-DD"
           style={{width: '100%'}}
           suffixIcon={null}
+          value={
+            field.value && field.value[0] && field.value[1]
+              ? [dayjs(field.value[0]), dayjs(field.value[1])]
+              : null
+          }
+          onChange={(dates) => {
+            field.onChange(
+              dates && dates[0] && dates[1] ? [dates[0].toDate(), dates[1].toDate()] : [null, null],
+            );
+          }}
         />
       </div>
     </div>
