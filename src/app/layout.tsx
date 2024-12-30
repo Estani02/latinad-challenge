@@ -7,6 +7,7 @@ import es_ES from 'antd/es/locale/es_ES';
 import Image from 'next/image';
 
 import {Header} from '@/components/layout/Header';
+import {StoreProvider} from '@/provider';
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '700'],
@@ -27,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} bg-primary antialiased`}>
-        <ConfigProvider locale={es_ES}>
-          <Header />
-          {children}
-        </ConfigProvider>
+        <StoreProvider>
+          <ConfigProvider locale={es_ES}>
+            <Header />
+            {children}
+          </ConfigProvider>
+        </StoreProvider>
         <Image
           alt="bg"
           className="absolute bottom-0 left-0 right-0"

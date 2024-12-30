@@ -11,6 +11,8 @@ interface SearchAreaProps<T extends FieldValues> {
 }
 
 interface Coords {
+  lat: string;
+  lon: string;
   lat_sw: string;
   lng_sw: string;
   lat_ne: string;
@@ -44,9 +46,17 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
       });
 
       const results = response.data.map(
-        (item: {name: string; display_name: string; boundingbox: string[]}) => ({
+        (item: {
+          name: string;
+          display_name: string;
+          lat: string;
+          lon: string;
+          boundingbox: string[];
+        }) => ({
           value: item.display_name,
           coords: {
+            lat: item.lat,
+            lon: item.lon,
             lat_sw: item.boundingbox[0],
             lng_sw: item.boundingbox[2],
             lat_ne: item.boundingbox[1],
@@ -72,7 +82,7 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
 
   const onClear = () => {
     setLocationSelected('');
-    field.onChange({lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''});
+    field.onChange({lan: '', lon: '', lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''});
   };
 
   return (
