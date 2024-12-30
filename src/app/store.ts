@@ -2,37 +2,42 @@ import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/query';
 import {persistStore} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
+import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
+import campaignReducer from '@/features/campaignSlice';
 import {mySaga} from '@/features/sagas';
 
-// const createNoopStorage = () => {
-//   return {
-//     getItem(_key: unknown) {
-//       return Promise.resolve(null);
-//     },
-//     setItem(_key: unknown, value: unknown) {
-//       return Promise.resolve(value);
-//     },
-//     removeItem(_key: unknown) {
-//       return Promise.resolve();
-//     },
-//   };
-// };
+const createNoopStorage = () => {
+  return {
+    getItem(_key: unknown) {
+      return Promise.resolve(null);
+    },
+    setItem(_key: unknown, value: unknown) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key: unknown) {
+      return Promise.resolve();
+    },
+  };
+};
 
-// const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
+const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
 
-// const persistConfig = {
-//   key: 'auth',
-//   storage,
-// };
+const persistConfig = {
+  key: 'auth',
+  storage,
+};
 
 // const persistedAuthReducer = persistReducer(persistConfig);
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: {},
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({thunk: false}).concat(sagaMiddleware),
+  reducer: {
+    campaign: campaignReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({thunk: false, serializableCheck: false}).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(mySaga);
