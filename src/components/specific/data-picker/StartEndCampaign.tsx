@@ -36,7 +36,9 @@ export function StartEndCampaign<T extends FieldValues>({field}: StartEndCampaig
           }
           onChange={(dates) => {
             field.onChange(
-              dates && dates[0] && dates[1] ? [dates[0].toDate(), dates[1].toDate()] : [null, null],
+              dates && dates[0] && dates[1]
+                ? [dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]
+                : [null, null],
             );
           }}
         />
