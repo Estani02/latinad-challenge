@@ -19,7 +19,7 @@ function* fetchCampaignSaga(
       axios.get,
       `https://api.dev.publinet.io/displays/searchTest${strQuery}`,
     );
-    const data = response.data as CampaignResponse;
+    const data = (response as {data: CampaignResponse}).data;
 
     yield put(fetchCampaignSuccess(data));
   } catch (error) {
