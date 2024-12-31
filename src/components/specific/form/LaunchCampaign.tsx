@@ -42,7 +42,7 @@ export function LaunchCampaign() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    dispatch(fetchCampaignRequest(data));
+    return dispatch(fetchCampaignRequest(data));
   });
 
   return (
@@ -56,11 +56,6 @@ export function LaunchCampaign() {
         render={({field}) => (
           <div className="flex w-full flex-col lg:w-auto lg:gap-1">
             <SearchArea<LaunchCampaignType> field={field} />
-            {/* {errors.coordinates && (
-              <span className="ml-10 w-fit rounded-b-2xl bg-red-500 px-5 py-1 text-xs text-white lg:ml-0 lg:bg-transparent lg:py-0 lg:pl-10 lg:pr-0 lg:text-red-500">
-                Debes seleccionar una opción
-              </span>
-            )} */}
           </div>
         )}
       />
@@ -79,11 +74,6 @@ export function LaunchCampaign() {
             <SearchIcon size={20} />
           </button>
         </div>
-        {/* {errors.startEnd && (
-          <span className="ml-10 w-fit rounded-b-2xl bg-red-500 px-5 py-1 text-xs text-white lg:ml-0 lg:bg-transparent lg:py-0 lg:pl-10 lg:pr-0 lg:text-red-500">
-            Debes seleccionar una fecha de inicio y fin
-          </span>
-        )} */}
       </div>
     </form>
   );

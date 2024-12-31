@@ -16,16 +16,18 @@ export function Map() {
     iconSize: [24, 36],
   });
 
-  const parsedLat = parseFloat(coordinates?.lat);
-  const parsedLon = parseFloat(coordinates?.lon);
+  const parsedLat = data?.data[0].latitude ? data?.data[0].latitude : parseFloat(coordinates?.lat);
+  const parsedLon = data?.data[0].longitude
+    ? data?.data[0].longitude
+    : parseFloat(coordinates?.lon);
 
   return (
-    <div className="z-[10] flex h-[400px] w-full">
+    <div className="z-[10] flex h-[400px] w-full rounded-2xl bg-white">
       <MapContainer
         center={[parsedLat, parsedLon]}
-        className="h-full w-full"
+        className="h-full w-full rounded-2xl"
         scrollWheelZoom={false}
-        zoom={14}
+        zoom={13}
       >
         <TileLayer
           attribution="Google Maps"
