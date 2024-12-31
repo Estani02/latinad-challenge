@@ -41,11 +41,18 @@ export function CampaignsResult() {
       ) : data ? (
         <Map />
       ) : (
-        <div className="flex h-[460px] w-full flex-col items-center justify-center gap-4 rounded-2xl bg-white p-6">
+        <div className="relative flex h-[460px] w-full flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl bg-white p-6">
           <h5 className="flex flex-col items-center text-center text-xl font-medium text-gray-500 lg:text-3xl">
             Busca la campaña en el<span> lugar y fecha que deseas</span>
           </h5>
           <Image alt="Cliente de LatinAd" height={170} src="/man-pc.png" width={170} />
+          <Image
+            alt="Pantallas"
+            className="absolute -left-20 bottom-10 -scale-x-[1]"
+            height={300}
+            src="/screens.png"
+            width={300}
+          />
         </div>
       )}
     </div>

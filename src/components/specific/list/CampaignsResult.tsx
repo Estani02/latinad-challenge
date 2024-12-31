@@ -1,6 +1,7 @@
 import {Alert, List, Pagination} from 'antd';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';
+import Link from 'next/link';
 
 import {useAppSelector} from '@/hooks';
 import {fetchCampaignRequest} from '@/features/campaignSlice';
@@ -10,7 +11,10 @@ export function CampaignsResult() {
   const {data, currentPage, coordinates, startEnd} = useAppSelector((state) => state.campaign);
   const [perPage, setPerPage] = useState(5);
 
-  const listData = data?.data.map((item) => item.name);
+  const listData = data?.data.map((item) => ({
+    name: item.name,
+    id: item.id,
+  }));
 
   const handlePageChange = (page: number, pageSize?: number) => {
     const newPerPage = pageSize || perPage;
@@ -26,7 +30,11 @@ export function CampaignsResult() {
         className="h-[280px] w-full overflow-hidden overflow-y-auto"
         dataSource={listData}
         header={<h5 className="font-medium">Resultados de la zona</h5>}
-        renderItem={(item) => <List.Item>{item}</List.Item>}
+        renderItem={(item) => (
+          <List.Item>
+            <Link href={`/detalle-pantalla/${item.id}`}>{item.name}</Link>
+          </List.Item>
+        )}
       />
       <div className="flex flex-col items-center justify-center gap-2 lg:gap-4">
         <Pagination

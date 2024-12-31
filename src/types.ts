@@ -18,6 +18,10 @@ export interface Picture {
   url: string;
 }
 
+export type SizeType = 'small' | 'medium' | 'large' | 'giant';
+
+export type LocationType = 'indoor' | 'outdoor' | 'point of sale' | 'buses';
+
 export interface CampaignItem {
   id: number;
   name: string;
@@ -34,8 +38,8 @@ export interface CampaignItem {
   slot_length: number;
   shows_per_hour: number;
   price_per_day: number;
-  location_type: string;
-  size_type: string;
+  location_type: LocationType;
+  size_type: SizeType;
   size_width: number;
   size_height: number;
   description: string | null;

@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {CampaignResponse, Coords, LaunchCampaignType} from '@/types';
+import {RootState} from '@/app/store';
 
 interface CampaignState {
   data?: CampaignResponse;
@@ -54,6 +55,9 @@ const campaignSlice = createSlice({
     },
   },
 });
+
+export const selectCampaignById = (state: RootState, id: number) =>
+  state.campaign.data?.data.find((item) => item.id === id);
 
 export const {fetchCampaignRequest, fetchCampaignSuccess, fetchCampaignFailure} =
   campaignSlice.actions;
