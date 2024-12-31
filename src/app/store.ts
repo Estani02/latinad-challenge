@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/query';
-import {persistStore} from 'redux-persist';
+import {persistStore, persistReducer} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
@@ -24,17 +24,17 @@ const createNoopStorage = () => {
 const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
 
 const persistConfig = {
-  key: 'auth',
+  key: 'root',
   storage,
 };
 
-// const persistedAuthReducer = persistReducer(persistConfig);
+const persistedCampaignReducer = persistReducer(persistConfig, campaignReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
-    campaign: campaignReducer,
+    campaign: persistedCampaignReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({thunk: false, serializableCheck: false}).concat(sagaMiddleware),
