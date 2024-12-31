@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {CampaignResponse, Coords, LaunchCampaignType} from '@/types';
+import {CampaignResponse, Coords, FormatDate, LaunchCampaignType} from '@/types';
 import {RootState} from '@/app/store';
 
 interface CampaignState {
   data?: CampaignResponse;
   loading: boolean;
   error: string | null;
-  startEnd: [Date | null, Date | null];
+  startEnd: FormatDate[];
   coordinates: Coords;
   currentPage: number;
   perPage: number;
