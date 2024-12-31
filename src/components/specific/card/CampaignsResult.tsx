@@ -48,7 +48,7 @@ export function CampaignsResult() {
           <Image alt="Cliente de LatinAd" height={170} src="/man-pc.png" width={170} />
           <Image
             alt="Pantallas"
-            className="absolute -left-20 bottom-10 -scale-x-[1]"
+            className="absolute -left-20 bottom-10 hidden -scale-x-[1] lg:block"
             height={300}
             src="/screens.png"
             width={300}

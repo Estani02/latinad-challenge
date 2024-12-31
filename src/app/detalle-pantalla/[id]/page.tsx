@@ -1,9 +1,9 @@
 'use client';
-import {useParams} from 'next/navigation';
+import {useParams, useRouter} from 'next/navigation';
 import Image from 'next/image';
 import {Card, Descriptions, Skeleton} from 'antd';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {selectCampaignById} from '@/features/campaignSlice';
 import {useAppSelector} from '@/hooks';
@@ -15,8 +15,14 @@ import {
 
 export default function ScreenDetail() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const router = useRouter();
   const {id} = useParams<{id: string}>();
   const campaign = useAppSelector((state) => selectCampaignById(state, Number(id)));
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [router]);
 
   if (!campaign) {
     return (
@@ -37,7 +43,7 @@ export default function ScreenDetail() {
       </div>
     );
   }
-  const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${campaign.latitude},${campaign.longitude}`;
+  const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${campaign?.latitude},${campaign?.longitude}`;
 
   return (
     <div className="mt-4 flex h-full w-full items-center justify-center px-[10px] py-6">
@@ -46,13 +52,25 @@ export default function ScreenDetail() {
           cover={
             <div className="relative h-[300px] w-full overflow-hidden rounded-t-xl">
               {isLoading && <Skeleton.Image active className="!h-full !w-full" />}
-              <Image
-                alt={campaign.name}
-                layout="fill"
-                objectFit="cover"
-                src={campaign.pictures[0].url}
-                onLoadingComplete={() => setIsLoading(false)}
-              />
+              {campaign.pictures && campaign.pictures.length > 0 && campaign.pictures[0]?.url ? (
+                isError ? (
+                  <Skeleton.Image className="!h-full !w-full" />
+                ) : (
+                  <Image
+                    alt={campaign.name}
+                    layout="fill"
+                    objectFit="cover"
+                    src={campaign.pictures[0]?.url}
+                    onError={() => {
+                      setIsLoading(false);
+                      setIsError(true);
+                    }}
+                    onLoadingComplete={() => setIsLoading(false)}
+                  />
+                )
+              ) : (
+                <Skeleton.Image className="!h-full !w-full" />
+              )}
             </div>
           }
         >
