@@ -16,9 +16,11 @@ export function Map() {
     iconSize: [24, 36],
   });
 
-  const parsedLat = data?.data[0].latitude ? data?.data[0].latitude : parseFloat(coordinates?.lat);
-  const parsedLon = data?.data[0].longitude
-    ? data?.data[0].longitude
+  const parsedLat = data?.data[0]?.latitude
+    ? data?.data[0]?.latitude
+    : parseFloat(coordinates?.lat);
+  const parsedLon = data?.data[0]?.longitude
+    ? data?.data[0]?.longitude
     : parseFloat(coordinates?.lon);
 
   return (
