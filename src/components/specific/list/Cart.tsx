@@ -32,7 +32,7 @@ export function Cart() {
   return (
     <List
       bordered
-      className="h-[80%] w-full overflow-hidden overflow-y-auto"
+      className="h-[60%] w-full overflow-hidden overflow-y-auto lg:h-[70%]"
       dataSource={cartItems}
       renderItem={(item) => (
         <List.Item className="!px-4">
@@ -43,7 +43,7 @@ export function Cart() {
             <div className="flex items-center justify-end gap-4">
               <p className="text-sm text-primary">
                 $
-                {((parseFloat(item.price.toString()) * 1).toFixed(2) as unknown as number) *
+                {parseFloat(parseFloat(item.price.toString()).toFixed(2)) *
                   calculateDaysBetweenDates(startEnd)}
               </p>
               <p className="text-sm">

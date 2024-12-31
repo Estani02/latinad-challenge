@@ -45,7 +45,8 @@ export function calculateDaysBetweenDates(dates: FormatDate[]): number {
   const [startDateString, endDateString] = dates;
 
   if (!startDateString || !endDateString) {
-    throw new Error('Date strings cannot be null');
+    // throw new Error('Date strings cannot be null');
+    return 0;
   }
   const startDate = new Date(startDateString);
   const endDate = new Date(endDateString);
