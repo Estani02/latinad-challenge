@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
 import campaignReducer from '@/features/campaignSlice';
+import cartReducer from '@/features/cartSlice';
 import {mySaga} from '@/features/sagas';
 
 const createNoopStorage = () => {
@@ -29,12 +30,14 @@ const persistConfig = {
 };
 
 const persistedCampaignReducer = persistReducer(persistConfig, campaignReducer);
+const persistedCartReducer = persistReducer(persistConfig, cartReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
     campaign: persistedCampaignReducer,
+    cart: persistedCartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({thunk: false, serializableCheck: false}).concat(sagaMiddleware),

@@ -1,12 +1,14 @@
 'use client';
 import {useParams, useRouter} from 'next/navigation';
 import Image from 'next/image';
-import {Card, Descriptions, Skeleton} from 'antd';
+import {Button, Card, Descriptions, Skeleton} from 'antd';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
+import {Plus} from 'lucide-react';
 
 import {selectCampaignById} from '@/features/campaignSlice';
-import {useAppSelector} from '@/hooks';
+import {addItem} from '@/features/cartSlice';
+import {useAppDispatch, useAppSelector} from '@/hooks';
 import {
   formatMillisecondsToMinutesAndSeconds,
   translateLocationType,
@@ -19,10 +21,24 @@ export default function ScreenDetail() {
   const router = useRouter();
   const {id} = useParams<{id: string}>();
   const campaign = useAppSelector((state) => selectCampaignById(state, Number(id)));
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [router]);
+
+  const handleAddToCart = () => {
+    if (campaign) {
+      dispatch(
+        addItem({
+          id: campaign.id,
+          name: campaign.name,
+          price: campaign.price_per_day,
+          quantity: 1,
+        }),
+      );
+    }
+  };
 
   if (!campaign) {
     return (
@@ -74,8 +90,16 @@ export default function ScreenDetail() {
             </div>
           }
         >
-          <div className="mb-8">
+          <div className="mb-8 flex w-full items-center justify-between">
             <Card.Meta description={campaign.description} title={campaign.name} />
+            <Button
+              className="mt-4"
+              icon={<Plus size={16} />}
+              type="primary"
+              onClick={handleAddToCart}
+            >
+              Agregar al Carrito
+            </Button>
           </div>
           <Descriptions bordered column={1}>
             <Descriptions.Item label="ID">{campaign.id}</Descriptions.Item>
