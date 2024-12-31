@@ -6,7 +6,10 @@ interface CampaignState {
   data?: CampaignResponse;
   loading: boolean;
   error: string | null;
+  startEnd: [Date | null, Date | null];
   coordinates: Coords;
+  currentPage: number;
+  perPage: number;
 }
 
 const initialState: CampaignState = {
@@ -21,16 +24,25 @@ const initialState: CampaignState = {
     lat_ne: '',
     lng_ne: '',
   },
+  startEnd: [null, null],
+  currentPage: 1,
+  perPage: 5,
 };
 
 const campaignSlice = createSlice({
   name: 'campaign',
   initialState,
   reducers: {
-    fetchCampaignRequest(state, action: PayloadAction<LaunchCampaignType>) {
+    fetchCampaignRequest(
+      state,
+      action: PayloadAction<LaunchCampaignType & {page?: number; per_page?: number}>,
+    ) {
       state.loading = true;
       state.error = null;
       state.coordinates = action.payload.coordinates;
+      state.startEnd = action.payload.startEnd;
+      state.currentPage = action.payload.page ? action.payload.page : 1;
+      state.perPage = action.payload.per_page ? action.payload.per_page : 5;
     },
     fetchCampaignSuccess(state, action: PayloadAction<CampaignResponse>) {
       state.loading = false;
