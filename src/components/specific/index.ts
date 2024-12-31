@@ -9,3 +9,5 @@ export * as From from './form';
 export * as DataPicker from './data-picker';
 
 export * as Drawer from './drawer';
+
+export * as Skeleton from './skeleton';
