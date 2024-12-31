@@ -3,6 +3,7 @@ import {useParams} from 'next/navigation';
 import Image from 'next/image';
 import {Card, Descriptions, Skeleton} from 'antd';
 import Link from 'next/link';
+import {useState} from 'react';
 
 import {selectCampaignById} from '@/features/campaignSlice';
 import {useAppSelector} from '@/hooks';
@@ -13,6 +14,7 @@ import {
 } from '@/utils';
 
 export default function ScreenDetail() {
+  const [isLoading, setIsLoading] = useState(true);
   const {id} = useParams<{id: string}>();
   const campaign = useAppSelector((state) => selectCampaignById(state, Number(id)));
 
@@ -43,11 +45,13 @@ export default function ScreenDetail() {
         <Card
           cover={
             <div className="relative h-[300px] w-full overflow-hidden rounded-t-xl">
+              {isLoading && <Skeleton.Image active className="!h-full !w-full" />}
               <Image
                 alt={campaign.name}
                 layout="fill"
                 objectFit="cover"
                 src={campaign.pictures[0].url}
+                onLoadingComplete={() => setIsLoading(false)}
               />
             </div>
           }
