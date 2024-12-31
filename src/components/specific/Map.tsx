@@ -22,7 +22,7 @@ export function Map() {
     : parseFloat(coordinates?.lon);
 
   return (
-    <div className="z-[10] flex h-[400px] w-full rounded-2xl bg-white">
+    <div className="z-[10] flex h-[460px] w-full rounded-2xl bg-white">
       <MapContainer
         center={[parsedLat, parsedLon]}
         className="h-full w-full rounded-2xl"

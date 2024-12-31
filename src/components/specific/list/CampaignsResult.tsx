@@ -1,4 +1,4 @@
-import {List, Pagination} from 'antd';
+import {Alert, List, Pagination} from 'antd';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';
 
@@ -20,7 +20,7 @@ export function CampaignsResult() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-3">
+    <div className="flex flex-col items-center justify-center gap-3 p-6">
       <List
         bordered
         className="h-[280px] w-full overflow-hidden overflow-y-auto"
@@ -28,13 +28,21 @@ export function CampaignsResult() {
         header={<h5 className="font-medium">Resultados de la zona</h5>}
         renderItem={(item) => <List.Item>{item}</List.Item>}
       />
-      <Pagination
-        current={currentPage}
-        pageSize={perPage}
-        size="small"
-        total={data?.total}
-        onChange={handlePageChange}
-      />
+      <div className="flex flex-col items-center justify-center gap-2 lg:gap-4">
+        <Pagination
+          current={currentPage}
+          pageSize={perPage}
+          size="small"
+          total={data?.total}
+          onChange={handlePageChange}
+        />
+        <Alert
+          showIcon
+          className="py-2 text-xs lg:py-3 lg:text-sm"
+          description="El mapa mostrará solo los ítems visibles en la página actual, según la cantidad seleccionada."
+          type="info"
+        />
+      </div>
     </div>
   );
 }
