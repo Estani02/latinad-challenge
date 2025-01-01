@@ -13,7 +13,6 @@ const {RangePicker} = DatePicker;
 
 export function StartEndCampaign<T extends FieldValues>({field}: StartEndCampaignProps<T>) {
   const disabledDate = (current: dayjs.Dayjs) => {
-    // Can not select days before today
     return current && current < dayjs().startOf('day');
   };
 
@@ -38,7 +37,7 @@ export function StartEndCampaign<T extends FieldValues>({field}: StartEndCampaig
             field.onChange(
               dates && dates[0] && dates[1]
                 ? [dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]
-                : [null, null],
+                : undefined,
             );
           }}
         />

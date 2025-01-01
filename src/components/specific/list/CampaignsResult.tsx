@@ -1,3 +1,4 @@
+'use client';
 import {Alert, List, Pagination} from 'antd';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';

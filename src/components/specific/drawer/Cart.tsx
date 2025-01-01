@@ -33,7 +33,7 @@ export function Cart() {
 
     doc.text('Campaña publicitaria', 10, 10);
     doc.text(
-      `Fecha: ${startEnd[0]} - ${startEnd[1]} (${calculateDaysBetweenDates(startEnd)} días)`,
+      `Fecha: ${startEnd?.[0] ?? 'N/A'} - ${startEnd?.[1] ?? 'N/A'} (${startEnd ? calculateDaysBetweenDates(startEnd) : 'N/A'} días)`,
       10,
       20,
     );
@@ -80,7 +80,9 @@ export function Cart() {
               </div>
               <div className="flex flex-col gap-4 text-end font-semibold text-gray-500">
                 <p>
-                  {startEnd[0]} - {startEnd[1]} ({calculateDaysBetweenDates(startEnd)} días)
+                  {startEnd
+                    ? `${startEnd[0]} - ${startEnd[1]} (${calculateDaysBetweenDates(startEnd)} días)`
+                    : 'Fecha no disponible'}
                 </p>
                 <p>${calculateTotal()}</p>
               </div>

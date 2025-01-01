@@ -37,7 +37,7 @@ export function LaunchCampaign() {
     resolver: zodResolver(schema),
     defaultValues: {
       coordinates: {lat: '', lon: '', lat_sw: '', lng_sw: '', lat_ne: '', lng_ne: ''},
-      startEnd: [null, null],
+      startEnd: undefined,
     },
   });
 

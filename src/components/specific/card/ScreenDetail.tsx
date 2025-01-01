@@ -17,11 +17,15 @@ import {
 import {Specific} from '@/components';
 
 export function ScreenDetail() {
+  const {id} = useParams<{id: string}>();
+
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const {id} = useParams<{id: string}>();
+
   const campaign = useAppSelector((state) => selectCampaignById(state, Number(id)));
+  const {startEnd} = useAppSelector((state) => state.campaign);
   const dispatch = useAppDispatch();
+
   const [msg, contextHolder] = notification.useNotification();
 
   const handleAddToCart = () => {
@@ -32,6 +36,7 @@ export function ScreenDetail() {
           name: campaign.name,
           price: campaign.price_per_day,
           quantity: 1,
+          campaignDuration: startEnd,
         }),
       );
       msg.success({

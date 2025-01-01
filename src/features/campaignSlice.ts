@@ -7,7 +7,7 @@ interface CampaignState {
   data?: CampaignResponse;
   loading: boolean;
   error: string | null;
-  startEnd: FormatDate[];
+  startEnd?: FormatDate;
   coordinates: Coords;
   currentPage: number;
   perPage: number;
@@ -25,7 +25,7 @@ const initialState: CampaignState = {
     lat_ne: '',
     lng_ne: '',
   },
-  startEnd: [null, null],
+  startEnd: undefined,
   currentPage: 1,
   perPage: 5,
 };

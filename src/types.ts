@@ -7,11 +7,11 @@ export interface Coords {
   lng_ne: string;
 }
 
-export type FormatDate = `${string}-${string}-${string}` | null;
+export type FormatDate = [`${string}-${string}-${string}`, `${string}-${string}-${string}`];
 
 export interface LaunchCampaignType {
   coordinates: Coords;
-  startEnd: FormatDate[];
+  startEnd?: FormatDate;
 }
 
 export interface Picture {

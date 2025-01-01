@@ -37,17 +37,13 @@ export const formatMillisecondsToMinutesAndSeconds = (ms: number) => {
   return `${minutes}:${parseInt(seconds) < 10 ? '0' : ''}${seconds}`;
 };
 
-export function calculateDaysBetweenDates(dates: FormatDate[]): number {
-  if (!Array.isArray(dates) || dates.length !== 2) {
-    throw new Error("El array debe contener exactamente dos fechas en formato 'YYYY-MM-DD'.");
+export function calculateDaysBetweenDates(dates?: FormatDate): number {
+  if (!dates) {
+    return 0;
   }
 
   const [startDateString, endDateString] = dates;
 
-  if (!startDateString || !endDateString) {
-    // throw new Error('Date strings cannot be null');
-    return 0;
-  }
   const startDate = new Date(startDateString);
   const endDate = new Date(endDateString);
 

@@ -14,6 +14,9 @@ function* fetchCampaignSaga(
 ): Generator<unknown, void, unknown> {
   try {
     const {coordinates, startEnd, page, per_page} = action.payload;
+
+    if (!startEnd) throw new Error('No Dates provided');
+
     const strQuery = `?lat_sw=${coordinates.lat_sw}&lng_sw=${coordinates.lng_sw}&lat_ne=${coordinates.lat_ne}&lng_ne=${coordinates.lng_ne}&date_from=${startEnd[0]}&date_to=${startEnd[1]}&page=${page ? page : 1}&per_page=${per_page ? per_page : 5}`;
     const response = yield call(
       axios.get,

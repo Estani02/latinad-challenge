@@ -1,10 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+import {FormatDate} from '@/types';
+
 interface CartItem {
   id: number;
   name: string;
   price: number;
   quantity: number;
+  campaignDuration?: FormatDate;
 }
 
 interface CartState {
