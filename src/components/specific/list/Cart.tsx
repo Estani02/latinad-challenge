@@ -9,7 +9,6 @@ import {calculateDaysBetweenDates} from '@/utils';
 export function Cart() {
   const dispatch = useAppDispatch();
   const {items: cartItems} = useAppSelector((state) => state.cart);
-  const {startEnd} = useAppSelector((state) => state.campaign);
 
   const handleRemove = (id: number) => {
     dispatch(removeItem(id));
@@ -42,15 +41,13 @@ export function Cart() {
             </Tooltip>
             <div className="flex items-center justify-end gap-4">
               <p className="text-sm text-primary">
-                $
-                {parseFloat(parseFloat(item.price.toString()).toFixed(2)) *
-                  calculateDaysBetweenDates(startEnd)}
+                ${(item.price * calculateDaysBetweenDates(item.campaignDuration)).toFixed(2)}
               </p>
               <p className="text-sm">
                 <span className="font-semibold">Subtotal:</span> $
                 {(
                   parseFloat((parseFloat(item.price.toString()) * item.quantity).toFixed(2)) *
-                  calculateDaysBetweenDates(startEnd)
+                  calculateDaysBetweenDates(item.campaignDuration)
                 ).toFixed(2)}
               </p>
             </div>

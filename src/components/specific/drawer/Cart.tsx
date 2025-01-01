@@ -75,15 +75,9 @@ export function Cart() {
           <div className="mt-12 w-full rounded-2xl border border-solid px-4 py-3">
             <div className="lgw-3/4 flex w-full items-center justify-between">
               <div className="flex flex-col gap-4 text-xl font-bold text-gray-800">
-                <p>Fecha:</p>
                 <p>Total:</p>
               </div>
               <div className="flex flex-col gap-4 text-end font-semibold text-gray-500">
-                <p>
-                  {startEnd
-                    ? `${startEnd[0]} - ${startEnd[1]} (${calculateDaysBetweenDates(startEnd)} días)`
-                    : 'Fecha no disponible'}
-                </p>
                 <p>${calculateTotal()}</p>
               </div>
             </div>
