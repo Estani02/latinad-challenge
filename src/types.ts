@@ -12,6 +12,13 @@ export type FormatDate = [`${string}-${string}-${string}`, `${string}-${string}-
 export interface LaunchCampaignType {
   coordinates: Coords;
   startEnd?: FormatDate;
+  search?: string;
+  locationType?: LocationType;
+  priceMin?: number;
+  priceMax?: number;
+  sizeType?: SizeType;
+  page?: number;
+  per_page?: number;
 }
 
 export interface Picture {

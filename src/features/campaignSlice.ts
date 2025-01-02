@@ -1,6 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {CampaignResponse, Coords, FormatDate, LaunchCampaignType} from '@/types';
+import {
+  CampaignResponse,
+  Coords,
+  FormatDate,
+  LaunchCampaignType,
+  LocationType,
+  SizeType,
+} from '@/types';
 import {RootState} from '@/app/store';
 
 interface CampaignState {
@@ -11,6 +18,11 @@ interface CampaignState {
   coordinates: Coords;
   currentPage: number;
   perPage: number;
+  search?: string;
+  locationType?: LocationType;
+  priceMin?: number;
+  priceMax?: number;
+  sizeType?: SizeType;
 }
 
 const initialState: CampaignState = {
@@ -28,6 +40,11 @@ const initialState: CampaignState = {
   startEnd: undefined,
   currentPage: 1,
   perPage: 5,
+  search: '',
+  locationType: undefined,
+  priceMin: undefined,
+  priceMax: undefined,
+  sizeType: undefined,
 };
 
 const campaignSlice = createSlice({
@@ -44,6 +61,11 @@ const campaignSlice = createSlice({
       state.startEnd = action.payload.startEnd;
       state.currentPage = action.payload.page ? action.payload.page : 1;
       state.perPage = action.payload.per_page ? action.payload.per_page : 5;
+      state.search = action.payload.search;
+      state.locationType = action.payload.locationType;
+      state.priceMin = action.payload.priceMin;
+      state.priceMax = action.payload.priceMax;
+      state.sizeType = action.payload.sizeType;
     },
     fetchCampaignSuccess(state, action: PayloadAction<CampaignResponse>) {
       state.loading = false;
