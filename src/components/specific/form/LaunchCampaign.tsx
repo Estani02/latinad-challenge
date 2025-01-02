@@ -47,7 +47,7 @@ export function LaunchCampaign() {
 
   return (
     <form
-      className="mt-10 flex flex-col items-center gap-4 rounded-full py-2 text-weak lg:flex-row lg:gap-0 lg:bg-white lg:px-4"
+      className="mt-2 flex flex-col items-center gap-4 rounded-full py-2 text-weak lg:flex-row lg:gap-0 lg:bg-white lg:px-4"
       onSubmit={onSubmit}
     >
       <Controller

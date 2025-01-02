@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import {Spin} from 'antd';
 
-import {Map} from '../Map';
+import {Map} from '../../Map';
 
 import {useAppSelector} from '@/hooks';
 import {Specific} from '@/components';
@@ -12,7 +12,7 @@ export function CampaignsResult() {
   const {data, loading} = useAppSelector((state) => state.campaign);
 
   return (
-    <div className="flex h-full w-full flex-col gap-6 py-9 lg:flex-row">
+    <div className="flex h-full w-full flex-col gap-6 pb-9 lg:flex-row">
       <div className="relative h-[460px] w-full overflow-hidden rounded-2xl bg-white lg:max-w-[450px]">
         {data ? (
           <Specific.List.CampaignsResult />
