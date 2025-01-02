@@ -20,7 +20,7 @@ export function StartEndCampaign<T extends FieldValues>({field}: StartEndCampaig
     <div className="flex h-fit items-center">
       <Calendar className="text-weak" size={20} />
       <div className="flex flex-col px-3">
-        <span className="text-xs text-weak">Rango de campaña</span>
+        <span className="text-xs text-weak">Rango de campaña *</span>
         <RangePicker
           required
           className="border-none p-0 px-2 shadow-none outline-none"

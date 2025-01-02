@@ -6,7 +6,7 @@ export const translateSizeType = (sizeType: SizeType): string => {
       return 'Pequeña';
     case 'medium':
       return 'Mediana';
-    case 'large':
+    case 'big':
       return 'Grande';
     case 'giant':
       return 'Gigante';
@@ -21,7 +21,7 @@ export const translateLocationType = (locationType: LocationType): string => {
       return 'Interior';
     case 'outdoor':
       return 'Exterior';
-    case 'point of sale':
+    case 'pos':
       return 'Punto de venta';
     case 'buses':
       return 'Autobuses';

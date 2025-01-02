@@ -30,10 +30,10 @@ function* fetchCampaignSaga(
     let strQuery = `?lat_sw=${coordinates.lat_sw}&lng_sw=${coordinates.lng_sw}&lat_ne=${coordinates.lat_ne}&lng_ne=${coordinates.lng_ne}&date_from=${startEnd[0]}&date_to=${startEnd[1]}&page=${page ? page : 1}&per_page=${per_page ? per_page : 5}`;
 
     if (search) strQuery += `&search=${search}`;
-    if (locationType) strQuery += `&location_type=${locationType}`;
+    if (locationType) strQuery += `&location_type[]=${locationType}`;
     if (priceMin) strQuery += `&price_min=${priceMin}`;
     if (priceMax) strQuery += `&price_max=${priceMax}`;
-    if (sizeType) strQuery += `&size_type=${sizeType}`;
+    if (sizeType) strQuery += `&size_type[]=${sizeType}`;
 
     const response = yield call(
       axios.get,

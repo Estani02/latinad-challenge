@@ -92,7 +92,7 @@ export function SearchArea<T extends FieldValues>({field}: SearchAreaProps<T>) {
     <div className="flex h-fit w-full items-center rounded-full bg-white px-4 py-2 lg:w-auto lg:bg-none lg:p-0">
       <MapPin className="text-weak" size={20} />
       <div className="flex w-full flex-col px-3 lg:w-auto">
-        <span className="pl-1 text-xs text-weak">Zona de campaña</span>
+        <span className="pl-1 text-xs text-weak">Zona de campaña *</span>
         <AutoComplete
           allowClear
           className="h-fit w-full lg:w-[400px]"

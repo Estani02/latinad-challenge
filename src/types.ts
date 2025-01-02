@@ -27,9 +27,9 @@ export interface Picture {
   url: string;
 }
 
-export type SizeType = 'small' | 'medium' | 'large' | 'giant';
+export type SizeType = 'small' | 'medium' | 'big' | 'giant';
 
-export type LocationType = 'indoor' | 'outdoor' | 'point of sale' | 'buses';
+export type LocationType = 'indoor' | 'outdoor' | 'pos' | 'buses';
 
 export interface CampaignItem {
   id: number;
