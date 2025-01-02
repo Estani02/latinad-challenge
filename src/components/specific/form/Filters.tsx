@@ -118,7 +118,7 @@ export function Filters() {
           Filtrar búsqueda
         </Button>
         <Button color="danger" variant="outlined" onClick={filterClean}>
-          Limpiar filtos
+          Limpiar filtros
         </Button>
       </div>
     </form>
