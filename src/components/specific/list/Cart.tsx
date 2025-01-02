@@ -38,7 +38,7 @@ export function Cart() {
           <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:justify-between">
             <div className="flex flex-col gap-2">
               <Tooltip placement="top" title={item.name}>
-                <p className="line-clamp-1 text-center text-lg font-bold lg:text-left">
+                <p className="line-clamp-1 text-center text-lg font-bold lg:w-[250px] lg:text-left">
                   {item.name}
                 </p>
               </Tooltip>
