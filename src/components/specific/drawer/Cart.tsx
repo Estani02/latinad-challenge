@@ -56,7 +56,7 @@ export function Cart() {
       open={isOpen}
       placement="right"
       title="Carrito de Compras"
-      width={500}
+      width={700}
       onClose={onClose}
     >
       {cartItems.length === 0 ? (
