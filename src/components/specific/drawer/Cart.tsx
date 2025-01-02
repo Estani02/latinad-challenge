@@ -10,7 +10,6 @@ import {calculateDaysBetweenDates} from '@/utils';
 export function Cart() {
   const dispatch = useAppDispatch();
   const {items: cartItems, isOpen} = useAppSelector((state) => state.cart);
-  const {startEnd} = useAppSelector((state) => state.campaign);
 
   const onClose = () => {
     dispatch(closeCart());
@@ -21,7 +20,7 @@ export function Cart() {
       .reduce((total, item) => {
         const itemTotal =
           parseFloat((parseFloat(item.price.toString()) * item.quantity).toFixed(2)) *
-          calculateDaysBetweenDates(startEnd);
+          calculateDaysBetweenDates(item.campaignDuration);
 
         return total + itemTotal;
       }, 0)
@@ -33,7 +32,7 @@ export function Cart() {
 
     doc.text('Campaña publicitaria', 10, 10);
     doc.text(
-      `Fecha: ${startEnd?.[0] ?? 'N/A'} - ${startEnd?.[1] ?? 'N/A'} (${startEnd ? calculateDaysBetweenDates(startEnd) : 'N/A'} días)`,
+      `Fecha: ${new Date().toLocaleDateString()} - Hora: ${new Date().toLocaleTimeString()}`,
       10,
       20,
     );
@@ -41,7 +40,7 @@ export function Cart() {
 
     cartItems.forEach((item, index) => {
       doc.text(
-        `${index + 1}. ${item.name} - Cantidad: ${item.quantity} - Precio: $${item.price}`,
+        `${index + 1}. ${item.name} - Cantidad: ${item.quantity} - Precio: $${(item.price * calculateDaysBetweenDates(item.campaignDuration)).toFixed(2)} - Fecha: ${item.campaignDuration?.[0]} - ${item.campaignDuration?.[1]}`,
         10,
         40 + index * 10,
       );
