@@ -36,7 +36,7 @@ export default function RootLayout({
         </StoreProvider>
         <Image
           alt="bg"
-          className="absolute bottom-0 left-0 right-0 -z-10"
+          className="fixed bottom-0 left-0 right-0 -z-10"
           height={400}
           src="/bk-latinad.png"
           width={1724}
