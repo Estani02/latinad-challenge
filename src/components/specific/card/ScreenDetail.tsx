@@ -81,7 +81,7 @@ export function ScreenDetail() {
           </div>
         }
       >
-        <div className="mb-8 flex w-full items-center justify-between">
+        <div className="mb-8 flex w-full flex-col items-center justify-between text-center lg:flex-row lg:text-left">
           <Card.Meta description={campaign.description} title={campaign.name} />
           <Button
             className="mt-4"
