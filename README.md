@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+
+# 🏆 Latinad Challenge
+
+Bienvenido al proyecto **Latinad Challenge**, una aplicación desarrollada con [Next.js](https://nextjs.org) utilizando [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+---
+
+## 🌐 Despliegue
+
+El proyecto está desplegado en Vercel y puedes acceder desde el siguiente enlace:  
+🔗 [Latinad Challenge en Vercel](https://eolmedo-latinad-challenge.vercel.app/)
+
+---
+
+## ⚙️ Requisitos
+
+Asegúrate de tener instaladas las siguientes herramientas antes de empezar:
+
+- **Node.js**: versión 22 o superior
+- **pnpm**: gestor de paquetes rápido y eficiente
+
+---
+
+## 🚀 Instalación
+
+1. Clona el repositorio y accede al directorio del proyecto:
+
+   ```bash
+   git clone https://github.com/Estani02/latinad-challenge.git
+   cd latinad-challenge
+   ```
+
+2. Instala las dependencias necesarias:
+
+   ```bash
+   pnpm install
+   ```
+
+---
+
+## 🛠️ Ejecución del Proyecto
+
+### Servidor de desarrollo
+Inicia el servidor de desarrollo con:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Luego, abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Construcción para producción
+Genera los archivos optimizados para producción con:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm build
+```
 
-## Learn More
+### Servidor en producción
+Ejecuta el servidor en modo producción con:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📏 Linting y Formateo
 
-## Deploy on Vercel
+Para analizar el código y mantener estándares de calidad, ejecuta:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📂 Estructura del Proyecto
+
+```plaintext
+latinad-challenge/
+├── src/                # Código fuente del proyecto
+│   ├── pages/          # Rutas y páginas de Next.js
+│   ├── components/     # Componentes reutilizables
+│   └── app/            # Configuración y estilos globales
+├── public/             # Archivos estáticos públicos
+├── .vscode/            # Configuración para Visual Studio Code
+├── .next/              # Archivos generados por Next.js
+├── tailwind.config.ts  # Configuración de Tailwind CSS
+├── tsconfig.json       # Configuración de TypeScript
+├── eslint.config.mjs   # Configuración de ESLint
+└── postcss.config.mjs  # Configuración de PostCSS
+```
+
+---
+
+## 📖 Documentación Técnica
+
+### Herramientas Utilizadas
+
+- **Next.js**: Framework de React para aplicaciones web rápidas y modernas.
+- **Tailwind CSS**: Framework CSS basado en utilidades para diseño ágil.
+- **TypeScript**: Lenguaje tipado estático que mejora la productividad.
+- **ESLint**: Análisis estático para mantener un código limpio.
+- **Prettier**: Formateador de código.
+- **pnpm**: Gestor de paquetes eficiente.
+
+### Configuraciones Clave
+
+- **ESLint**: Mantiene la calidad del código con reglas personalizadas definidas en `eslint.config.mjs`.
+- **Tailwind CSS**: Configuración de estilos y colores personalizados en `tailwind.config.ts`.
+- **TypeScript**: Configuración del compilador en `tsconfig.json`.
+
+---
+
+## 📤 Despliegue
+
+El proyecto se despliega fácilmente en [Vercel](https://vercel.com). Consulta la [documentación oficial](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
+
+---
+
+## 📚 Recursos Adicionales
+
+- [Documentación de Next.js](https://nextjs.org/docs)  
+- [Aprende Next.js](https://nextjs.org/learn)  
+- [Repositorio GitHub de Next.js](https://github.com/vercel/next.js)  
+
+---
+
+## 📝 Licencia
+
+Este proyecto está bajo la **Licencia MIT**.
+
+---
+
+🚀 ¡Gracias por contribuir al proyecto! Si tienes alguna duda o sugerencia, no dudes en abrir un [issue](https://github.com) o enviar un pull request.

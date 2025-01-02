@@ -10,7 +10,7 @@ export function Filters() {
   const {startEnd, coordinates} = useAppSelector((state) => state.campaign);
   const dispatch = useAppDispatch();
 
-  const {control, handleSubmit} = useForm<LaunchCampaignType>({
+  const {control, handleSubmit, reset} = useForm<LaunchCampaignType>({
     defaultValues: {
       coordinates: undefined,
       startEnd: undefined,
@@ -50,6 +50,7 @@ export function Filters() {
         startEnd: startEnd,
       }),
     );
+    reset();
   };
 
   return (
